@@ -34,6 +34,18 @@ $ lein repl
 clojure-noob.core=> (-main)
 ```
 
+To start CIDER REPL:
+
+```
+M-x cider-jack-in
+```
+
+To compile current file within REPL session:
+
+```
+C-c M-n
+```
+
 ## License
 
 Copyright © 2017 FIXME

@@ -43,6 +43,18 @@ M-x cider-jack-in
 To compile current file within REPL session:
 
 ```
+C-c C-k
+```
+
+To evaluate expression:
+
+```
+C-x C-e
+```
+
+To switch namespace:
+
+```
 C-c M-n
 ```
 

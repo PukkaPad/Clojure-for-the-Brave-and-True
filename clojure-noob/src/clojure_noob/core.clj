@@ -8,49 +8,6 @@
 (println "Cleanliness is next to godliness")
 
 
-
-
-;; Exercises
-
-;; 1. Use the str, vector, list, hash-map, and hash-set functions.
-;; str
-(str "Clojure is a functional pregramming language")
-;; list
-'(17 12 21 02 07)
-(list 17 12 21 02 07)
-;; hash-map
-(hash-map :Mariana 0 :Clojure 10)
-;;hash-set
-(hash-set 3 3 3 7 2 7 2 0 8 0 9)
-
-;; 2. Write a function that takes a number and adds 100 to it.
-(defn inc-maker
-  "Create a function that generates  inc-number incrememt"
-  [inc-number]
-  #(+ % inc-number))
-
-(def inc-funct
-  "Add 100 to a number"
-  (inc-maker 100))
-
-(inc-funct 50)
-
-;; 3. Write a function, dec-maker, that works exactly like the function inc-maker except with subtraction
-(defn dec-maker
-  [sub-num]
-  #(- % sub-num))
-
-(def subtract-function
-  "Removes 9"
-  (dec-maker 9))
-
-(subtract-function 10)
-
-;; Write a function, mapset, that works like map except the return value is a set:
-(defn mapset [f coll]
-  (set (map f coll)))
-
-
 ;; Chapter 5
 
 ; Pure functions are referentially transparent 

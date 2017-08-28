@@ -193,4 +193,68 @@
             (set [part (matching-part part)])))))))
 ;(symmetrize-body-parts asym-hobbit-body-parts)
 
+(defn better-symmetrize-body-parts
+  "Expects a seq of maps that have a :name and :size"
+  [asym-body-parts]
+  (reduce (fn [final-body-parts part]
+            (into final-body-parts (set [part (matching-part part)])))
+          []
+          asym-body-parts))
+
+(defn hit
+  [asym-body-parts]
+  (let [sym-parts (better-symmetrize-body-parts asym-body-parts)
+        body-part-size-sum (reduce + (map :size sym-parts))
+        target (rand body-part-size-sum)]
+    (loop [[part & remaining] sym-parts
+           accumulated-size (:size part)]
+      (if (> accumulated-size target)
+        part
+        (recur remaining (+ accumulated-size (:size (first remaining))))))))
+
+;(hit asym-hobbit-body-parts)
+
+                                        ; Exercises
+;; 1. Use the str, vector, list, hash-map and hash-set functions
+(defn say-hi
+  [name]
+  (str "Hi, " name))
+;(say-hi "Mariana")
+
+(reduce + (vector 1 2 3))
+
+(conj (list 1 2 3) "test")
+
+(defn exercise-hashmap
+  [x y]
+  (hash-map :first x :second y))
+;(exercise-hashmap "Sleep" "Food")
+
+(defn exercise-hashset
+  [a & b]
+ (apply hash-set (when (= a 8) b)))
+;(exercise-hashset 8 3)
+
+
+;; 2. Write a function that takes a number and adds 100 to it.
+(defn add-num
+  [num]
+  (reduce + 100 [num]))
+;(add-num 4)
+
+;; 3. Write a function, dec-maker, that works exactly like the function inc-maker except with subtraction
+(defn dec-maker
+  [dec-by]
+  #(- % dec-by ))
+(def dec9 (dec-maker 9))
+;(dec9 8)
+;(dec9 19)
+
+;;4. Write a function, mapset, that works like map except the return value is a set
+(defn mapset [f coll]
+  (set (map f coll)))
+
+;(mapset inc [1 1 11 11 23 2])
+
+
 

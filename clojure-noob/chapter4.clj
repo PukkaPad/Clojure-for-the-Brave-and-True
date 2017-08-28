@@ -85,3 +85,83 @@
 
 (sort [3 1 2])
 (sort-by count ["aaa" "c" "bb"])
+(sort ["aaa" "c" "bb"])
+
+(def vampire-database
+  {0 {:makes-blood-puns? false, :has-pulse? true :name "McFishwich"}
+   1 {:makes-blood-puns? false, :has-pulse? true  :name "McMackson"}
+   2 {:makes-blood-puns? true,  :has-pulse? false :name "Damon Salvatore"}
+   3 {:makes-blood-puns? true,  :has-pulse? true  :name "Mickey Mouse"}})
+
+(defn vampire-related-details
+  [social-security-number]
+  (Thread/sleep 1000)
+  (get vampire-database social-security-number))
+
+(defn vampire?
+  "this will return a record if it passes the vampire test"
+  [record]
+  (and (:makes-blood-puns? record)
+       (not (:has-pulse? record))
+       record))
+
+(defn identify-vampire
+  [social-security-numbers]
+  (first (filter vampire?
+                 (map vampire-related-details social-security-numbers))))
+(time (vampire-related-details 0))
+
+(concat (take 8 (repeat "na")) ["Batman!"])
+
+(take 3 (repeatedly (fn [] (rand-int 10))))
+
+(defn even-numbers
+  ([] (even-numbers 0))
+  ([n] (cons n (lazy-seq (even-numbers (+ n 2))))))
+(take 10 (even-numbers))
+
+(empty? [])
+(empty? ["no!"])
+
+(map identity {:sunlight-reaction "Glitter!"})
+(into {} (map identity {:sunlight-reaction "Glitter!"}))
+
+(map identity [:garlic :sesame-oil :fried-eggs])
+(into [] (map identity [:garlic :sesame-oil :fried-eggs]))
+
+(map identity [:garlic-clove :garlic-clove])
+(into #{} (map identity [:garlic-clove :garlic-clove]))
+
+(into {:favorite-emotion "gloomy"} [[:sunlight-reaction "Glitter!"]])
+(into ["cherry"] '("pine" "spruce"))
+(into {:favorite-animal "kitty"} {:least-favorite-smell "dog"
+                                  :relationship-with-teenager "creepy"})
+
+(conj [0] [1])
+(into [0] [1])
+(conj [0] 1)
+(conj [0] 1 2 3 4 5 6 7)
+(conj {:time "midnight"} [:place "ye olde cemetarium"])
+
+(max 0 1 3 2)
+(apply max [0 1 2 -2])
+
+(def add10 (partial + 10))
+(add10 3)
+(add10 5)
+
+(def add-missing-elements
+  (partial conj ["water" "earth" "air"]))
+(add-missing-elements "unobtainium" "adamantium")
+
+
+(defn lousy-logger
+  [log-level message]
+  (condp = log-level
+    :warn (clojure.string/lower-case message)
+    :emergency (clojure.string/upper-case message)))
+
+(def warn (partial lousy-logger :warn))
+
+(warn "Red light ahead")
+(lousy-logger :warn "Red light ahead")

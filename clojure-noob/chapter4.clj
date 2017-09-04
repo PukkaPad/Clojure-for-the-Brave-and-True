@@ -165,3 +165,14 @@
 
 (warn "Red light ahead")
 (lousy-logger :warn "Red light ahead")
+
+(defn identify-humans
+  [social-security-numbers]
+  (filter #(not (vampire? %))
+          (map vampire-related-details social-security-numbers)))
+
+(def not-vampire? (complement vampire?))
+(defn identify-humans
+  [social-security-numbers]
+  (filter not-vampire?
+          (map vampire-related-details social-security-numbers)))
